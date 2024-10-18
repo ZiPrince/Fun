@@ -1,14 +1,34 @@
-import { animated } from '@react-spring/web'
-import './App.css'
+import { useSpring, animated } from '@react-spring/web';
+import cloud from './assets/cloud.png';
+export default function App() {
 
+//api controls animations~ many methods, including start, stop, set, etc
+	const [springs, api] = useSpring(() => ({
+    	from: { x: 600, y: 200 },
+	}))
 
-function App() {
+	const handleClick = () => { 
+		api.start({
+			from: {x: 600, y: 200},
+			to: {x:800, y: 100}, 
+		})
+	}
 
 	return (
 		<animated.div
-			style={{width: 80, height: 80, background: "#ff6d6d"}}
-		/>
+			onClick={handleClick}
+			style={{
+			width: 280,
+			height: 280,
+			borderRadius: 8,
+			...springs
+		}}>
+			<div>
+				<img src={cloud} /><br/>
+				Click me!
+			</div>
+
+		</animated.div>
+		
 	)
 }
-
-export default App
