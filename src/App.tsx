@@ -17,13 +17,21 @@ export default function App() {
 
 	//!lerp function: see notes in lerp
 	const lerp = (x: number, y: number, a:number) => 
-		x * (1 - a) + y * a;
+		(x * (1 - a) + y * a);
 	// a: % scrolled. x: top of page:0, y: bottom 
 
-	//!for cat 
+	//!for clamping to keep scrollY within 0.5-1 only
 
-	// const {scrollYProgress} = useScroll();
-	
+	const clamp = (min:number, max:number, value:number) => {
+		if (value<min) {
+			value= min; 
+		} else if(value > max) {
+			value=max;
+		}
+		return value;
+	}
+
+
 	//! for scrollPosition
 
 	const [scrollPosition, setScrollPosition] = useState(0);
@@ -31,22 +39,38 @@ export default function App() {
 
 	useScroll({
 		onChange: ({ value: scrollY }) => {
-				console.log(scrollY);
 				setScrollYPercent(scrollY.scrollYProgress);
-				setScrollPosition(scrollY.scrollY)
-				
+				setScrollPosition(scrollY.scrollY)	
 		}
 	});
 
 	//! scrollPosition ends!
+	
+	//!returns the SCROLL PIXEL RANGE to RANGE BETWEEN 0 to 1 for CLAMPING later
 
+	const movement = (start: number, finish: number) => { 
 
+		const convertStartingPixelPositiontoZeroPercent = scrollPosition-start; 
+		const convertEndingPixelPositiontoHundredPercent = finish-start; 
+		return convertStartingPixelPositiontoZeroPercent/convertEndingPixelPositiontoHundredPercent;
+	}
+
+	const moving = clamp(0, 1, movement(200, 600));
+	//!returns a % between 0 and 1
+
+	//~ easing
+	function easeInOutCubic(x: number): number {
+		return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+		}
+
+	
 
 	return (
 		<>
 		<div className="containerFixed">
 			Scroll position: {scrollPosition} <br/>
-			Scroll %: {scrollYPercent}
+			Scroll %: {scrollYPercent} <br/>
+			Moving % but clamped: {moving} <br/>
 		</div>
 		<div className="title">
 			Learning React Spring~
@@ -70,15 +94,31 @@ export default function App() {
 			</div>
 			</animated.div>
 		</div>
+{/* //~ cat moving after 50% scroll */}
+		<div className="container"> 
+			<animated.div> 
+				<img style={{
+					width: "200px", 
+					opacity: 1
+				}} 
+src="https://img.freepik.com/premium-psd/portrait-british-shorthair-cat-isolated-transparent-background-png_1075135-347.jpg"/>
+			</animated.div> 
+		</div>
 
 		<div className="container">
 			<div className="description">
 				Fancier stuff... using useScroll() inside an onChange function to get scroll position and percentage, and then using that number in a lerp function to animate my cat~
 			</div>
 			<animated.div> 
-				<img style={{marginLeft:lerp(0, window.screen.width, scrollYPercent)}} src="https://www.freeiconspng.com/thumbs/cat-png/cat-png-17.png" />
+				<img style={{
+					left:lerp(window.screen.width-300, window.screen.width-100, moving),
+					top:lerp(200, 300, easeInOutCubic(moving)),
+					position: "fixed",
+				}} src="https://www.petplan.co.uk/images/breeds/british-shorthair.png" />
 			</animated.div> 
 		</div>
+
+
 
 		<div className="container"> 
 			I had some trouble figuring out how to destruct the scroll position from the useScroll function....
@@ -91,6 +131,10 @@ export default function App() {
 
 	
 
+	
+
 		</>
 	)
 }
+
+
