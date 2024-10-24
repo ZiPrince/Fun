@@ -1,40 +1,142 @@
-.title { 
-	font-size: 80pt;
+.movingText {
+	font-size: 60pt;
+	z-index:-2;
+	position: relative;
+	transform: rotate(-2deg);
+	overflow: hidden;
+}
+
+.cloudpic { 
+	width: 300px;
+	font-weight: bold;
+	opacity: 0.5;
+
+}
+.whiteText {
+	color: white;
+}
+
+.dogPicContainer { 
 	display: flex;
 	justify-content: center;
-	align-items: center;
-} 
+	height:300px;
+}
+
+
+
+.mainTitle { 
+	font-size: 200pt;
+	color: rgb(235, 235, 235);
+	font-weight: bold;
+    font-family:monospace;
+	display: flex;
+    justify-content: center;
+}
+
 
 .description { 
-	padding: 10px;
-	font-size: 30pt;
-}
-
-.container {
-	height: auto;
-	width: 1000px; 
-	background: rgb(182, 137, 162, 0.5);
-	border-radius: 10px;
-	justify-content: center;
-	margin-Top:100px;
-	font-size: 30pt;
+	padding: 200p x;
+	font-size: 100pt;
 
 }
 
-.cat { 
+
+.dogsBodyContainer {
+	margin: auto;
+	align-content: center;
+	font-size: 90px;
+	padding: 10% 20% 10% 20%;
+	background-color: #272f1b;
+	border: 10px rgb(2, 94, 22) solid;
+} 
+
+.labImgContainer { 
+	display: inline-block; /* shrink wrap to image */
+    overflow: hidden; /* hide the excess */
+	margin-left: 20%;
+	top: -100px;
+	position: relative;
+	border-top-left-radius: 250px;
+	border-top-right-radius: 250px;
+
+}
+
+.labImgContainer img { 
+	display: block; /* no whitespace */
+	transition: .3s ease-in-out;
+	width:450px;
+	height:600px;
+	border-top-left-radius: 5%;
+	border-top-right-radius: 5%;
+}
+
+.dogText2 {
+	z-index:2;
+	position: relative;
+	font-size: 2rem;
+	top:-300px;
+	left: 16%;
+	margin-right: 30%;
+}
+
+.dogText {
+	z-index:2;
+	font-size: 5rem;
+	position: relative;
+	top:-70px;
+}
+
+.puppy2{
+	position: relative;
+	width: 300px;
+	left: -22%;
+}
+
+.puppy3{
+	position:relative;
 	width: 200px;
-	padding: 20px;
-	border: 20px rgb(203, 115, 227) solid;
-	border-radius: 15pt;
-	
+	left: 90%;
 }
 
-.containerFixed {
-	height: auto;
-	width: auto; 
+.catContainer {
+	display: flex;
+	justify-content: center;
+	background: rgb(182, 137, 162, 0.5);
+	margin-Top:40px;
+	font-size: 30pt;
+	overflow: hidden;
+}
+
+
+.textContainer {
+	display: flex;
+	justify-content: center;
+	background: rgb(182, 137, 162, 0.5);
+	margin-Top:40px;
+	font-size: 30pt;
+	overflow: hidden;
+}
+
+
+
+.statsContainerFixed {
+	top: 40px;
+	left: 40px;
 	background: rgb(31, 23, 116);
 	border-radius: 10px;
 	position: fixed;
-	z-index:2;
-	font-size: 20pt;
+	font-size: 30pt;
+}
+
+
+.col { 
+	padding: 2px;
+	font-size: 1.6vw;
+	overflow: hidden;
+}
+
+.clouds {
+	position: relative;
+	top: -2000px;
+	z-index:4;
 }

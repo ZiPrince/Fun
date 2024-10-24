@@ -1,15 +1,12 @@
 :root {
-
-	color: rgb(239, 215, 239);
-	background-color: #b79aac;
+	color: #55623f;
+	background-color: #adc783;
 	font-family: Arial, Helvetica, sans-serif;
 
 }
 
 body {
-	margin: 0;
-	display: flex;
-	place-items: center;
+
 	min-width: 600px;
 	min-height: 100vh;
 	display: flex;
